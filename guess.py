@@ -12,6 +12,14 @@ def get_valid_input():
         except ValueError:
             print("That's not a valid number! Please enter an integer between 0 and 100.")
 
+def evaluate_guess(guess, secret_number):
+    if guess < secret_number:
+        return "low"
+    elif guess > secret_number:
+        return "high"
+    else:
+        return "correct"
+
 def play_game():
     secret_number = random.randint(0, 100)
     print("\nWelcome to the Higher/Lower Guessing Game!")
@@ -19,9 +27,11 @@ def play_game():
 
     while True:
         guess = get_valid_input()
-        if guess < secret_number:
+        result = evaluate_guess(guess, secret_number)
+
+        if result == "low":
             print("Too low! Try a higher number.\n")
-        elif guess > secret_number:
+        elif result == "high":
             print("Too high! Try a lower number.\n")
         else:
             print(f"Congratulations! You guessed it right. The number was {secret_number}.")
